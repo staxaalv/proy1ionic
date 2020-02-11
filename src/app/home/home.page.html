@@ -1,0 +1,31 @@
+<ion-header>
+  
+</ion-header>
+<ion-content padding align-items-center>
+  <ion-item>
+    <button routerLink="/">
+      <ion-icon name="home"></ion-icon>
+      Home
+    </button>
+  </ion-item>
+  <ion-item>
+    <button routerLink="/categoria">
+      <ion-icon name="cart"></ion-icon>
+      Comprar
+    </button>
+  </ion-item>
+  <ion-item >
+    <button routerLink="/admin">
+      <ion-icon name="map"></ion-icon>
+      Ver posicion
+    </button>
+  </ion-item>
+  
+  <ion-item>
+    <button (click)="onLogout()">
+      <ion-icon name="exit"></ion-icon>
+      Sign Out
+    </button>
+  </ion-item>
+  
+</ion-content>
