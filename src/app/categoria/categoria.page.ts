@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from "../services/categoria.service";
 import { AuthService } from "../services/auth.service";
-
-interface categoria{
-  id:string,
-  imagen:string,
-  nombre:string
-}
+import { Category } from "../shared/category.interface"; 
+import { NavController, NavParams } from '@ionic/angular';
+import { EnviarObjetoService } from "../services/enviar-objeto.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categoria',
@@ -15,16 +13,32 @@ interface categoria{
 })
 export class CategoriaPage implements OnInit {
 
-  public categorias:any=[];
+  public categorias:Category[];
 
-  constructor(public categoriaService:CategoriaService,public authservice:AuthService) { }
+  constructor(public categoriaService:CategoriaService,public enviarObjService:EnviarObjetoService, public router:Router/*, public navCtrl:NavController,public navParams:NavParams*/) { }
 
   ngOnInit() {
-    this.categoriaService.getallCategories().subscribe(categoria =>
+    /*this.categoriaService.getallCategories().subscribe(categoria =>
       categoria.map(categoria=>{
         const data:categoria=categoria.payload.doc.data() as categoria;
         this.categorias.push(data);
-      }));
+      }));*/
+      this.categoriaService.getCategorias().subscribe(
+        res =>{
+          this.categorias = res;
+        });
+  }
+
+  /*public pasarAProductos(x:any){
+
+      console.log(x);
+      this.navCtrl.navigateRoot("productos");
+  }*/
+
+  public goReciver(x:any){
+    this.enviarObjService.sendObjectSource(x);
+    //this.enviarObjService.sendListSource(this.list);
+    this.router.navigate(['/productos']);
   }
 
 
